@@ -1,0 +1,27 @@
+<header [attr.theme]="theme" [attr.mobileMode]="mobileMode">
+  <h1>
+    <a href="https://github.com/dudushy/signature.html" target="_blank">signature.html</a>
+  </h1>
+
+  <button *ngIf="theme == 'dark'" (click)="toggleTheme('light')">
+    <img alt="dark theme" src="assets/SVGs/sunny.svg">
+  </button>
+  <button *ngIf="theme == 'light'" (click)="toggleTheme('dark')">
+    <img alt="light theme" src="assets/SVGs/moon.svg">
+  </button>
+</header>
+<!-- <router-outlet></router-outlet> -->
+
+<main [attr.theme]="theme" [attr.mobileMode]="mobileMode">
+  Hello World!
+</main>
+
+<footer [attr.theme]="theme" [attr.mobileMode]="mobileMode">
+  <p>
+    Made with <span id="heart">&#10084;</span>
+    <br>
+    by
+    <br>
+    <a href="https://github.com/dudushy" target="_blank">dudushy</a>
+  </p>
+</footer>
