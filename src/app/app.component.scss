@@ -30,6 +30,15 @@ header {
 }
 
 main {
+  margin: 5%;
+
+  #signaturePad {
+    border: 3px solid $primary;
+    border-radius: 5px;
+    background-color: $light;
+    height: 50vh;
+    width: 100%;
+  }
 }
 
 footer {

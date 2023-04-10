@@ -13,7 +13,7 @@
 <!-- <router-outlet></router-outlet> -->
 
 <main [attr.theme]="theme" [attr.mobileMode]="mobileMode">
-  Hello World!
+  <canvas id="signaturePad" (mousedown)="startDraw($event)" (mousemove)="draw($event)" (mouseup)="stopDraw($event)" (mouseleave)="stopDraw($event)"></canvas>
 </main>
 
 <footer [attr.theme]="theme" [attr.mobileMode]="mobileMode">

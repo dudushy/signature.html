@@ -16,6 +16,8 @@ export class AppComponent {
   theme = 'dark';
   mobileMode = false;
 
+  drawing = false;
+
   constructor(
     private cdr: ChangeDetectorRef,
     private db: DbService,
@@ -33,6 +35,36 @@ export class AppComponent {
 
       this.toggleMobileMode();
     };
+  }
+
+  startDraw(event: any) {
+    console.log(`[${this.title}#startDraw] event`, event);
+
+    this.drawing = true;
+  }
+
+  draw(event: any) {
+    if (!this.drawing) return;
+
+    console.log(`[${this.title}#draw] event`, event);
+
+    const x = event.offsetX;
+    const y = event.offsetY;
+    console.log(`[${this.title}#draw] x:`, x, 'y:', y);
+
+    const canvas = document.getElementById('signaturePad') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+
+    ctx.fillStyle = 'black';
+    ctx?.fillRect(x, y, 2, 2);
+  }
+
+  stopDraw(event: any) {
+    if (!this.drawing) return;
+
+    console.log(`[${this.title}#stopDraw] event`, event);
+
+    this.drawing = false;
   }
 
   updateView(from: string) {
