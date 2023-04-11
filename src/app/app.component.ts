@@ -67,6 +67,25 @@ export class AppComponent {
     this.drawing = false;
   }
 
+  clearCanvas() {
+    console.log(`[${this.title}#clearCanvas]`);
+
+    const canvas = document.getElementById('signaturePad') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  downloadCanvas() {
+    const canvas = document.getElementById('signaturePad') as HTMLCanvasElement;
+    canvas.toBlob((blob) => {
+      const link = document.createElement('a');
+      link.download = 'signature.png';
+      link.href = URL.createObjectURL(blob as Blob);
+      link.click();
+    }, 'image/png');
+  }
+
   updateView(from: string) {
     console.log(`[${this.title}#updateView] from`, from);
     this.cdr.detectChanges;
