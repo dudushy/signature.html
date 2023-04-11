@@ -30,14 +30,46 @@ header {
 }
 
 main {
-  margin: 5%;
+  margin: 1%;
 
   #signaturePad {
     border: 3px solid $primary;
     border-radius: 5px;
     background-color: $light;
-    height: 50vh;
-    width: 100%;
+    height: 200px;
+    width: 600px;
+  }
+
+  button {
+    margin: 1%;
+    padding: 1%;
+    padding-inline: 0;
+    border-radius: 1em;
+    transition: all 300ms;
+    &[theme="dark"] {
+      border: 2px solid $light;
+    }
+    &[theme="light"] {
+      border: 2px solid $dark;
+    }
+    &[theme="dark"]:hover {
+      border: 2px solid $dark;
+    }
+    &[theme="light"]:hover {
+      border: 2px solid $light;
+    }
+
+    img {
+      width: 10%;
+    }
+  }
+
+  #clearCanvasButton {
+    background-color: $danger;
+  }
+
+  #downloadCanvasButton {
+    background-color: $success;
   }
 }
 

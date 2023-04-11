@@ -38,32 +38,37 @@ export class AppComponent {
   }
 
   startDraw(event: any) {
-    console.log(`[${this.title}#startDraw] event`, event);
-
     this.drawing = true;
+
+    const x = event.clientX - event.target.getBoundingClientRect().x;
+    const y = event.clientY - event.target.getBoundingClientRect().y;
+    console.log(`[${this.title}#startDraw] event`, event, 'x:', x, 'y:', y);
+
+    const canvas = document.getElementById('signaturePad') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+
+    ctx.lineWidth = 2;
+    ctx.lineJoin = ctx.lineCap = 'round';
+
+    ctx.beginPath();
+    ctx.moveTo(x, y);
   }
 
   draw(event: any) {
     if (!this.drawing) return;
 
-    console.log(`[${this.title}#draw] event`, event);
-
-    const x = event.offsetX;
-    const y = event.offsetY;
-    console.log(`[${this.title}#draw] x:`, x, 'y:', y);
+    const x = event.clientX - event.target.getBoundingClientRect().x;
+    const y = event.clientY - event.target.getBoundingClientRect().y;
+    console.log(`[${this.title}#draw] event`, event, 'x:', x, 'y:', y);
 
     const canvas = document.getElementById('signaturePad') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 
-    ctx.fillStyle = 'black';
-    ctx?.fillRect(x, y, 2, 2);
+    ctx.lineTo(x, y);
+    ctx.stroke();
   }
 
-  stopDraw(event: any) {
-    if (!this.drawing) return;
-
-    console.log(`[${this.title}#stopDraw] event`, event);
-
+  stopDraw() {
     this.drawing = false;
   }
 
