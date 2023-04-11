@@ -14,6 +14,15 @@
 
 <main [attr.theme]="theme" [attr.mobileMode]="mobileMode">
   <canvas id="signaturePad" (mousedown)="startDraw($event)" (mousemove)="draw($event)" (mouseup)="stopDraw($event)" (mouseleave)="stopDraw($event)"></canvas>
+
+  <div>
+    <button id="clearCanvasButton" (click)="clearCanvas()">
+      <img alt="clear canvas" src="assets/SVGs/reload.svg">
+    </button>
+    <button id="downloadCanvasButton" (click)="downloadCanvas()">
+      <img alt="download canvas" src="assets/SVGs/download.svg">
+    </button>
+  </div>
 </main>
 
 <footer [attr.theme]="theme" [attr.mobileMode]="mobileMode">
