@@ -1,0 +1,112 @@
+:root {
+  --responsiveMax: 1vmax;
+  --responsiveMin: 1vmin;
+  --rmax2px: unit(calc(var(--responsiveMax) + 0px), px);
+  --rmin2px: unit(calc(var(--responsiveMin) + 0px), px);
+
+  --text: #ffffff;
+  --wall: #000000;
+
+  --primary: #3880ff;
+  --secondary: #3dc2ff;
+  --tertiary: #5260ff;
+  --success: #2dd36f;
+  --warning: #ffc409;
+  --danger: #eb445a;
+  --dark: #222428;
+  --medium: #92949c;
+  --light: #f4f5f8;
+}
+
+@media (orientation: portrait) {
+  :root {
+    --responsiveMax: 1vh;
+    --responsiveMin: 1vw;
+    --rmax2px: unit(calc(var(--responsiveMax) + 0px), px);
+    --rmin2px: unit(calc(var(--responsiveMin) + 0px), px);
+  }
+}
+
+@media (orientation: landscape) {
+  :root {
+    --responsiveMax: 1vw;
+    --responsiveMin: 1vh;
+    --rmax2px: unit(calc(var(--responsiveMax) + 0px), px);
+    --rmin2px: unit(calc(var(--responsiveMin) + 0px), px);
+  }
+}
+
+body {
+  color: var(--text);
+  background-color: var(--wall);
+  text-align: center;
+  font-family: monospace;
+}
+
+a {
+  color: var(--tertiary);
+}
+
+span#heart {
+  color: var(--danger);
+}
+
+/*  */
+
+header > * {
+  font-size: calc(5 * var(--responsiveMin));
+}
+
+footer > * {
+  font-size: calc(4 * var(--responsiveMin));
+}
+
+#initialOptions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 2%;
+}
+
+#initialOptions input {
+  margin: 0.5%;
+}
+
+#initialOptions label {
+  font-size: calc(3 * var(--responsiveMin));
+}
+
+#signaturePad {
+  border: 2px solid var(--medium);
+  background: #fff;
+}
+
+button {
+  margin: 1%;
+  padding: 1%;
+  padding-inline: 10%;
+  border-radius: 1em;
+  border: 2px solid var(--dark);
+  transition: all 200ms ease-in-out;
+}
+
+button:hover {
+  border: 2px solid var(--light);
+}
+
+button img {
+  width: calc(8 * var(--responsiveMin));
+  transition: all 200ms ease-in-out;
+}
+
+button:hover img {
+  filter: invert(1);
+}
+
+#clearSignaturePadButton {
+  background-color: var(--danger);
+}
+
+#downloadSignaturePadButton {
+  background-color: var(--success);
+}
