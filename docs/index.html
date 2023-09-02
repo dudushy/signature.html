@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>signature.html</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+
+<body>
+  <header>
+    <h1>
+      <a href="https://github.com/dudushy/signature.html" target="_blank">signature.html</a>
+    </h1>
+  </header>
+  <hr>
+
+  <main>
+    <div id="initialOptions">
+      <input type="radio" id="blackColor" name="signaturePadColor" value="black" onclick="updateSignatureColor('#000')" checked>
+      <label for="blackColor">BLACK</label>
+
+      <input type="radio" id="blueColor" name="signaturePadColor" value="blue" onclick="updateSignatureColor('#00f')">
+      <label for="blueColor">BLUE</label>
+
+      <!-- <input type="radio" id="customColor" name="signaturePadColor" value="custom">
+      <label for="customColor">Custom</label> -->
+    </div>
+
+    <canvas id="signaturePad"></canvas>
+
+    <div id="finalOptions">
+      <button id="clearSignaturePadButton" onclick="clearSignature()">
+        <img alt="clear-canvas" src="assets/imgs/SVGs/reload.svg">
+      </button>
+
+      <button id="downloadSignaturePadButton" onclick="downloadSignature()">
+        <img alt="download-canvas" src="assets/imgs/SVGs/download.svg">
+      </button>
+    </div>
+  </main>
+
+  <hr>
+  <footer>
+    <h2>
+      Made with <span id="heart">&#10084;</span>
+      <br>
+      by <a href="https://github.com/dudushy" target="_blank">dudushy</a>
+    </h2>
+  </footer>
+
+  <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>
