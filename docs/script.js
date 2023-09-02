@@ -13,8 +13,14 @@ var y;
 var signatureColor = "#000";
 
 document.addEventListener("mousedown", startDrawing);
+document.addEventListener("touchstart", startDrawing_mobile);
+
 document.addEventListener("mousemove", drawStroke);
+document.addEventListener("touchmove", drawStroke_mobile);
+
 document.addEventListener("mouseup", stopDrawing);
+document.addEventListener("touchend", stopDrawing);
+
 window.addEventListener("resize", updateSignatureSize);
 
 function updateSignatureColor(color) {
@@ -47,11 +53,22 @@ function downloadSignature() {
 }
 
 function startDrawing(event) {
-  console.log(`[${TITLE}#startDrawing]`);
+  console.log(`[${TITLE}#startDrawing] event`, event);
 
   pressedMouse = true;
   x = event.offsetX;
   y = event.offsetY;
+}
+
+function startDrawing_mobile(event) {
+  console.log(`[${TITLE}#startDrawing_mobile] event`, event);
+
+  const rect = event.target.getBoundingClientRect();
+  console.log(`[${TITLE}#startDrawing_mobile] rect`, rect);
+
+  pressedMouse = true;
+  x = event.targetTouches[0].pageX - rect.left;
+  y = event.targetTouches[0].pageY - rect.top;
 }
 
 function stopDrawing() {
@@ -79,5 +96,35 @@ function drawStroke(event) {
 
     x = event.offsetX;
     y = event.offsetY;
+  }
+}
+
+function drawStroke_mobile(event) {
+  // console.log(`[${TITLE}#drawStroke_mobile] pressedMouse`, pressedMouse);
+
+  if (pressedMouse) {
+    console.log(`[${TITLE}#drawStroke_mobile] drawing`);
+
+    const rect = event.target.getBoundingClientRect();
+    console.log(`[${TITLE}#drawStroke_mobile] rect`, rect);
+
+    const pseudoOffsetX = event.targetTouches[0].pageX - rect.left;
+    console.log(`[${TITLE}#drawStroke_mobile] pseudoOffsetX`, pseudoOffsetX);
+
+    const pseudoOffsetY = event.targetTouches[0].pageY - rect.top;
+    console.log(`[${TITLE}#drawStroke_mobile] pseudoOffsetY`, pseudoOffsetY);
+
+    signaturePad.style.cursor = "crosshair";
+
+    ctx.beginPath();
+    ctx.strokeStyle = signatureColor;
+    ctx.lineWidth = 2;
+    ctx.moveTo(x, y);
+    ctx.lineTo(pseudoOffsetX, pseudoOffsetY);
+    ctx.stroke();
+    ctx.closePath();
+
+    x = pseudoOffsetX;
+    y = pseudoOffsetY;
   }
 }
