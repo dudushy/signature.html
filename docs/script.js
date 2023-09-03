@@ -12,14 +12,14 @@ var x;
 var y;
 var signatureColor = "#000";
 
-document.addEventListener("mousedown", startDrawing);
-document.addEventListener("touchstart", startDrawing_mobile, { passive: false });
+signaturePad.addEventListener("mousedown", startDrawing);
+signaturePad.addEventListener("touchstart", startDrawing_mobile, { passive: false });
 
-document.addEventListener("mousemove", drawStroke);
-document.addEventListener("touchmove", drawStroke_mobile, { passive: false });
+signaturePad.addEventListener("mousemove", drawStroke);
+signaturePad.addEventListener("touchmove", drawStroke_mobile, { passive: false });
 
-document.addEventListener("mouseup", stopDrawing);
-document.addEventListener("touchend", stopDrawing);
+signaturePad.addEventListener("mouseup", stopDrawing);
+signaturePad.addEventListener("touchend", stopDrawing);
 
 window.addEventListener("resize", updateSignatureSize);
 
