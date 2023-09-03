@@ -41,7 +41,7 @@ body {
   background-color: var(--wall);
   text-align: center;
   font-family: monospace;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 a {
