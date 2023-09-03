@@ -13,10 +13,10 @@ var y;
 var signatureColor = "#000";
 
 document.addEventListener("mousedown", startDrawing);
-document.addEventListener("touchstart", startDrawing_mobile);
+document.addEventListener("touchstart", startDrawing_mobile, { passive: false });
 
 document.addEventListener("mousemove", drawStroke);
-document.addEventListener("touchmove", drawStroke_mobile);
+document.addEventListener("touchmove", drawStroke_mobile, { passive: false });
 
 document.addEventListener("mouseup", stopDrawing);
 document.addEventListener("touchend", stopDrawing);
@@ -63,12 +63,24 @@ function startDrawing(event) {
 function startDrawing_mobile(event) {
   console.log(`[${TITLE}#startDrawing_mobile] event`, event);
 
+  event.preventDefault();
+  event.stopPropagation();
+
   const rect = event.target.getBoundingClientRect();
   console.log(`[${TITLE}#startDrawing_mobile] rect`, rect);
 
+  const scrollOffset = window.pageYOffset || document.documentElement.scrollTop;
+  console.log(`[${TITLE}#startDrawing_mobile] scrollOffset`, scrollOffset);
+
+  const pseudoOffsetX = event.targetTouches[0].pageX - rect.left;
+  console.log(`[${TITLE}#startDrawing_mobile] pseudoOffsetX`, pseudoOffsetX);
+
+  const pseudoOffsetY = event.targetTouches[0].pageY - rect.top - scrollOffset;
+  console.log(`[${TITLE}#startDrawing_mobile] pseudoOffsetY`, pseudoOffsetY);
+
   pressedMouse = true;
-  x = event.targetTouches[0].pageX - rect.left;
-  y = event.targetTouches[0].pageY - rect.top;
+  x = pseudoOffsetX;
+  y = pseudoOffsetY;
 }
 
 function stopDrawing() {
@@ -105,13 +117,19 @@ function drawStroke_mobile(event) {
   if (pressedMouse) {
     console.log(`[${TITLE}#drawStroke_mobile] drawing`);
 
+    event.preventDefault();
+    event.stopPropagation();
+
     const rect = event.target.getBoundingClientRect();
     console.log(`[${TITLE}#drawStroke_mobile] rect`, rect);
+
+    const scrollOffset = window.pageYOffset || document.documentElement.scrollTop;
+    console.log(`[${TITLE}#drawStroke_mobile] scrollOffset`, scrollOffset);
 
     const pseudoOffsetX = event.targetTouches[0].pageX - rect.left;
     console.log(`[${TITLE}#drawStroke_mobile] pseudoOffsetX`, pseudoOffsetX);
 
-    const pseudoOffsetY = event.targetTouches[0].pageY - rect.top;
+    const pseudoOffsetY = event.targetTouches[0].pageY - rect.top - scrollOffset;
     console.log(`[${TITLE}#drawStroke_mobile] pseudoOffsetY`, pseudoOffsetY);
 
     signaturePad.style.cursor = "crosshair";
